@@ -7,37 +7,12 @@ MarkdownConverter::MarkdownConverter(string toInput)
     
 string MarkdownConverter::toBold()
 {
-    /*
-    string retVal = inputLine;
-    int timesReplaced = 0;
-    string HtmlStart = "<strong>";
-    string HtmlEnd = "</strong>";
-
-    for (int i = 0; i < retVal.length()-1; i++)
-    {
-        if (retVal[i] == '*' && retVal[i+1] == '*')
-        {
-            timesReplaced++;
-            if (timesReplaced%2 != 0)
-            {
-                retVal.replace(i,2,HtmlStart);
-            } 
-            else
-            {
-                retVal.replace(i,2,HtmlEnd);
-            }
-        }
-    }
-    return retVal;
-    */
-
     return replaceNotation("**", "<strong>", "</strong>");
 }
 
 string MarkdownConverter::toItalic()
 {
-    string retVal = "";
-    return retVal;
+    return replaceNotation("*", "<em>", "</em>");
 }
 
 string MarkdownConverter::toHeader()
@@ -46,13 +21,20 @@ string MarkdownConverter::toHeader()
     return retVal;
 }
 
+    string MarkdownConverter::toOneLineCode()
+    {
+        return replaceNotation("`", "<code>", "</code>");
+    }
+
+
 string MarkdownConverter::replaceNotation(string markdownSyntax, string HtmlStart, string HtmlEnd)
 {
     string retVal = inputLine;
     int timesReplaced = 0;
     int syntaxLength = markdownSyntax.length();
+    int loopHelper = syntaxLength - 1;
 
-    for (int i = 0; i < retVal.length()-1; i++)
+    for (int i = 0; i < retVal.length()-loopHelper; i++)
     {
         if (retVal.substr(i, syntaxLength) == markdownSyntax)
         {

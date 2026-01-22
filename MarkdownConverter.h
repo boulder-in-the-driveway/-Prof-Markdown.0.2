@@ -8,9 +8,11 @@ class MarkdownConverter
 {
 public:
     MarkdownConverter(string toInput);
+    //toBold must ALWAYS be called before toItalic
     string toBold();
     string toItalic();
     string toHeader();
+    string toOneLineCode();
 
 private:
     string inputLine;
