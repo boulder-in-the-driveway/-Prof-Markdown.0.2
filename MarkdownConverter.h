@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 #include <string>
+#include <cctype>
 
 using namespace std;
 
@@ -13,6 +14,7 @@ public:
     string toItalic();
     string toHeader();
     string toOneLineCode();
+    string toList();
 
 private:
     string inputLine;

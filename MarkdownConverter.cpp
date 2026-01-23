@@ -21,11 +21,30 @@ string MarkdownConverter::toHeader()
     return retVal;
 }
 
-    string MarkdownConverter::toOneLineCode()
+string MarkdownConverter::toOneLineCode()
+{
+    return replaceNotation("`", "<code>", "</code>");
+}
+
+string MarkdownConverter::toList()
+{
+    string retVal = inputLine;
+
+    /*if (isdigit(retVal[0]))
     {
-        return replaceNotation("`", "<code>", "</code>");
+        if (retVal.substr(0,retVal.find_first_of(".")) == "1.")
+        {
+            retVal.insert(0, "")
+        }
+    }*/
+    if (retVal[0] == '-')
+    {
+        retVal.replace(0,1,"<li>");
+        retVal.append("</li>");
     }
 
+    return retVal;
+}
 
 string MarkdownConverter::replaceNotation(string markdownSyntax, string HtmlStart, string HtmlEnd)
 {

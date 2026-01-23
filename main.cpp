@@ -74,3 +74,14 @@ TEST_CASE("toCode Test")
 	REQUIRE(mc5.toBold() == "*this is italics* <strong>and this is bold!</strong>");
 	*/
 }
+TEST_CASE("toList Test")
+{
+	string s1 = "- This is a list item!";
+	string s2 = "this is not a list item";
+
+	MarkdownConverter mc1 = MarkdownConverter(s1);
+	MarkdownConverter mc2 = MarkdownConverter(s2);
+
+	REQUIRE(mc1.toList() == "<li> This is a list item!</li>");
+	REQUIRE(mc2.toBold() == s2);
+}
