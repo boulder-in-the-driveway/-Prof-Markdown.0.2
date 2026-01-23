@@ -4,12 +4,26 @@ MarkdownConverter::MarkdownConverter(string toInput)
 {
     inputLine = toInput;
     previousLine = "";
+    nextLine = "";
 }
 
 MarkdownConverter::MarkdownConverter(string toInput, string toPreviousLine)
 {
     inputLine = toInput;
     previousLine = toPreviousLine;
+    nextLine = "";
+}
+MarkdownConverter::MarkdownConverter(string toInput, string toPreviousLine, string toNextLine)
+{
+    inputLine = toInput;
+    previousLine = toPreviousLine;
+    nextLine = toNextLine;
+}
+MarkdownConverter::MarkdownConverter(string toInput, string toNextLine)
+{
+    inputLine = toInput;
+    previousLine = "";
+    nextLine = toNextLine;
 }
     
 string MarkdownConverter::toBold()
