@@ -3,6 +3,13 @@
 MarkdownConverter::MarkdownConverter(string toInput)
 {
     inputLine = toInput;
+    previousLine = "";
+}
+
+MarkdownConverter::MarkdownConverter(string toInput, string toPreviousLine)
+{
+    inputLine = toInput;
+    previousLine = toPreviousLine;
 }
     
 string MarkdownConverter::toBold()
@@ -30,17 +37,14 @@ string MarkdownConverter::toList()
 {
     string retVal = inputLine;
 
-    /*if (isdigit(retVal[0]))
-    {
-        if (retVal.substr(0,retVal.find_first_of(".")) == "1.")
-        {
-            retVal.insert(0, "")
-        }
-    }*/
     if (retVal[0] == '-')
     {
         retVal.replace(0,1,"<li>");
         retVal.append("</li>");
+        if (previousLine[0] != '-')
+        {
+            retVal.insert(0,"<ul>\n");
+        }
     }
 
     return retVal;
