@@ -47,6 +47,10 @@ string MarkdownConverter::toList()
         {
             retVal.insert(0,"<ul>\n");
         }
+        if (nextLine[0] != '-')
+        {
+            retVal.append("\n</ul>");
+        }
     }
 
     return retVal;

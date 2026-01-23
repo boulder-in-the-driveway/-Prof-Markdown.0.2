@@ -81,12 +81,16 @@ TEST_CASE("toList Test")
 
 	MarkdownConverter mc1 = MarkdownConverter(s1);
 	MarkdownConverter mc2 = MarkdownConverter(s2);
-	MarkdownConverter mc1_1 = MarkdownConverter(s1, s2, "");
-	MarkdownConverter mc1_2 = MarkdownConverter(s1, s1, "");
+	MarkdownConverter mc1_1 = MarkdownConverter(s1, s2, s2);
+	MarkdownConverter mc1_2 = MarkdownConverter(s1, s1, s1);
+	MarkdownConverter mc1_3 = MarkdownConverter(s1, s1, s2);
+	MarkdownConverter mc1_4 = MarkdownConverter(s1, s2, s1);
 
-	REQUIRE(mc1.toList() == "<ul>\n<li> This is a list item!</li>");
+	REQUIRE(mc1.toList() == "<ul>\n<li> This is a list item!</li>\n</ul>");
 	REQUIRE(mc2.toList() == s2);
-	REQUIRE(mc1_1.toList() == "<ul>\n<li> This is a list item!</li>");
+	REQUIRE(mc1_1.toList() == "<ul>\n<li> This is a list item!</li>\n</ul>");
 	REQUIRE(mc1_2.toList() == "<li> This is a list item!</li>");
+	REQUIRE(mc1_3.toList() == "<li> This is a list item!</li>\n</ul>");
+	REQUIRE(mc1_4.toList() == "<ul>\n<li> This is a list item!</li>");
 
 }
