@@ -26,6 +26,10 @@ string MarkdownConverter::toHeader()
         return replaceNotation("`", "<code>", "</code>");
     }
 
+string MarkdownConverter::toLink()
+{
+    return " ";
+}
 
 string MarkdownConverter::replaceNotation(string markdownSyntax, string HtmlStart, string HtmlEnd)
 {

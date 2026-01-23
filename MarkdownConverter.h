@@ -13,6 +13,7 @@ public:
     string toItalic();
     string toHeader();
     string toOneLineCode();
+    string toLink();
 
 private:
     string inputLine;
