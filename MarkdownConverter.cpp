@@ -56,3 +56,22 @@ string MarkdownConverter::replaceNotationOneLine(string markdownSyntax, string H
 {
     return "";
 }
+
+
+string MarkdownConverter::toParagraph()
+{
+   string retVal = inputLine; //look for the specified character "\n\n"
+    size_t pos; //store the position where the substring is located
+
+    
+    // Look for double newline characters
+    pos = retVal.find("\n\n");
+    if (pos != string::npos)
+    {
+        // Remove the double newlines
+        retVal.erase(pos, 2);
+        // Wrap the remaining text in <p> tags
+        retVal = "<p>" + retVal + "</p>";
+    }
+    return retVal;
+}

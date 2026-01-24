@@ -74,3 +74,18 @@ TEST_CASE("toCode Test")
 	REQUIRE(mc5.toBold() == "*this is italics* <strong>and this is bold!</strong>");
 	*/
 }
+
+TEST_CASE("toParagraph Test")
+{
+	string s1 = "this will be a paragraph\n\n"; //needs to be directly connected to the sentence
+	string s2 = "this will not be a paragraph";
+	//string s3 = "this will be a paragraph\n\n and this will not be";
+
+	MarkdownConverter mc1 = MarkdownConverter(s1);
+	MarkdownConverter mc2 = MarkdownConverter(s2);
+	//MarkdownConverter mc3 = MarkdownConverter(s3);
+
+	REQUIRE(mc1.toParagraph() == "<p>this will be a paragraph</p>");
+	REQUIRE(mc2.toParagraph() == "this will not be a paragraph");
+	//REQUIRE(mc3.toParagraph() == "<p>this will be a paragraph</p> and this will not be");
+}
