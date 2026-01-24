@@ -92,3 +92,30 @@ TEST_CASE("toParagraph Test")
 	REQUIRE(mc3.toParagraph() == "<p>this will be a paragraph</p> and this will not be");
 	//REQUIRE(mc4.toParagraph() == "<p>this will be a paragraph</p> <p>and this will be another one</p>");
 }
+
+TEST_CASE("toImage Test")  
+{ 
+	string s1 = "![this is an image](/path/to/img.jpg)";
+	string s2 = "![this is not an image]/path/to/img.jpg";
+	string s3 = "![this is an image](/path/to/img.jpg) **but this italics!**";
+	string s4 = "![this is an image](/path/to/img.jpg) and ![this is an image](/path/to/img.jpg)";
+	string s5 = "[this is a not an image](/path/to/img.jpg) and ![this is an image](/path/to/img.jpg)";
+	
+
+	MarkdownConverter mc1 = MarkdownConverter(s1);
+	
+	MarkdownConverter mc2 = MarkdownConverter(s2);
+	MarkdownConverter mc3 = MarkdownConverter(s3);
+	MarkdownConverter mc4 = MarkdownConverter(s4);
+	MarkdownConverter mc5 = MarkdownConverter(s5);
+	
+
+	
+	REQUIRE(mc1.toImage() == "<img src=\"/path/to/img.jpg\" alt=\"this is an image\">");
+	
+	REQUIRE(mc2.toImage() == "![this is not an image]/path/to/img.jpg"); 
+	REQUIRE(mc3.toImage() == "<img src=\"/path/to/img.jpg\" alt=\"this is an image\"> **but this italics!**");
+	REQUIRE(mc4.toImage() == "<img src=\"/path/to/img.jpg\" alt=\"this is an image\"> and <img src=\"/path/to/img.jpg\" alt=\"this is an image\">");
+	REQUIRE(mc5.toImage() == "[this is a not an image](/path/to/img.jpg) and <img src=\"/path/to/img.jpg\" alt=\"this is an image\">");
+	
+}

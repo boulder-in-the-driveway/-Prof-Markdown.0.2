@@ -14,6 +14,7 @@ public:
     string toHeader();
     string toOneLineCode();
     string toParagraph();
+    string toImage();
 
 private:
     string inputLine;

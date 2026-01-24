@@ -21,10 +21,15 @@ string MarkdownConverter::toHeader()
     return retVal;
 }
 
-    string MarkdownConverter::toOneLineCode()
-    {
-        return replaceNotation("`", "<code>", "</code>");
-    }
+string MarkdownConverter::toImage()
+{
+    
+}
+
+string MarkdownConverter::toOneLineCode()
+{
+    return replaceNotation("`", "<code>", "</code>");
+}
 
 
 string MarkdownConverter::replaceNotation(string markdownSyntax, string HtmlStart, string HtmlEnd)
