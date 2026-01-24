@@ -60,18 +60,23 @@ string MarkdownConverter::replaceNotationOneLine(string markdownSyntax, string H
 
 string MarkdownConverter::toParagraph()
 {
-   string retVal = inputLine; //look for the specified character "\n\n"
-    size_t pos; //store the position where the substring is located
+    string retVal = inputLine;
+    size_t pos = retVal.find("\n\n"); //look for the characters for the paragraph
 
-    
-    // Look for double newline characters
-    pos = retVal.find("\n\n");
-    if (pos != string::npos)
-    {
-        // Remove the double newlines
-        retVal.erase(pos, 2);
-        // Wrap the remaining text in <p> tags
-        retVal = "<p>" + retVal + "</p>";
+    if (pos != string::npos){
+
+        string before = retVal.substr(0, pos); //breaks up the continued string
+        string after = retVal.substr(pos + 2); //so we don't put tags on all of it
+
+        // trim trailing space from paragraph
+        while (!before.empty() && before.back() == ' ')
+        { //we don't want a space
+            before.pop_back();
+        }
+
+        retVal = "<p>" + before + "</p>" + after; //puts in the tags, 
+        //and includes the remaining string 
     }
+
     return retVal;
 }

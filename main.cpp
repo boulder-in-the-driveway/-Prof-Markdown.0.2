@@ -79,13 +79,16 @@ TEST_CASE("toParagraph Test")
 {
 	string s1 = "this will be a paragraph\n\n"; //needs to be directly connected to the sentence
 	string s2 = "this will not be a paragraph";
-	//string s3 = "this will be a paragraph\n\n and this will not be";
+	string s3 = "this will be a paragraph\n\n and this will not be";
+	//string s4 = "this will be a paragraph\n\n and this will be another one\n\n";
 
 	MarkdownConverter mc1 = MarkdownConverter(s1);
 	MarkdownConverter mc2 = MarkdownConverter(s2);
-	//MarkdownConverter mc3 = MarkdownConverter(s3);
+	MarkdownConverter mc3 = MarkdownConverter(s3);
+	//MarkdownConverter mc4 = MarkdownConverter(s4);
 
 	REQUIRE(mc1.toParagraph() == "<p>this will be a paragraph</p>");
 	REQUIRE(mc2.toParagraph() == "this will not be a paragraph");
-	//REQUIRE(mc3.toParagraph() == "<p>this will be a paragraph</p> and this will not be");
+	REQUIRE(mc3.toParagraph() == "<p>this will be a paragraph</p> and this will not be");
+	//REQUIRE(mc4.toParagraph() == "<p>this will be a paragraph</p> <p>and this will be another one</p>");
 }
