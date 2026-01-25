@@ -74,7 +74,7 @@ TEST_CASE("toCode Test")
 	REQUIRE(mc5.toBold() == "*this is italics* <strong>and this is bold!</strong>");
 	*/
 }
-TEST_CASE("toList Test")
+TEST_CASE("toList Unordered Test")
 {
 	string s1 = "- This is a list item!";
 	string s2 = "this is not a list item";
@@ -92,5 +92,26 @@ TEST_CASE("toList Test")
 	REQUIRE(mc1_2.toList() == "<li> This is a list item!</li>");
 	REQUIRE(mc1_3.toList() == "<li> This is a list item!</li>\n</ul>");
 	REQUIRE(mc1_4.toList() == "<ul>\n<li> This is a list item!</li>");
+}
+TEST_CASE("toList Ordered Test")
+{
+	string s0 = "- This is a list item!";
+	string s = "this is not a list item";
+	string s1 = "1. This is the first item!";
+	string s2 = "2. This is the second item!";
+	string s3 = "3. This is the third item!";
 
+	MarkdownConverter mc1 = MarkdownConverter(s0);
+	MarkdownConverter mc2 = MarkdownConverter(s);
+	MarkdownConverter mc3 = MarkdownConverter(s1);
+	MarkdownConverter mc3_1 = MarkdownConverter(s1, s, s2);
+	MarkdownConverter mc4 = MarkdownConverter (s2, s1, s3);
+	MarkdownConverter mc5 = MarkdownConverter (s3, s2, s);
+
+	REQUIRE(mc1.toList() == "<ul>\n<li> This is a list item!</li>\n</ul>");
+	REQUIRE(mc2.toList() == s);
+	REQUIRE(mc3.toList() == "<ol>\n<li> This is the first item!</li>\n</ol>");
+	REQUIRE(mc3_1.toList() == "<ol>\n<li> This is the first item!</li>");
+	REQUIRE(mc4.toList() == "<li> This is the second item!</li>");
+	REQUIRE(mc5.toList() == "<li> This is the third item!</li>\n</ol>");
 }

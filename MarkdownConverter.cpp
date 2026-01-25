@@ -52,6 +52,24 @@ string MarkdownConverter::toList()
             retVal.append("\n</ul>");
         }
     }
+    if (isdigit(retVal[0]))
+    {
+        int i = 0;
+        while (isdigit(retVal[i]) || retVal[i] == '.')
+        {
+            i++;
+        }
+        retVal.replace(0,i,"<li>");
+        retVal.append("</li>");
+        if (!isdigit(previousLine[0]))
+        {
+            retVal.insert(0,"<ol>\n");
+        }
+        if (!isdigit(nextLine[0]))
+        {
+            retVal.append("\n</ol>");
+        }
+    }
 
     return retVal;
 }
