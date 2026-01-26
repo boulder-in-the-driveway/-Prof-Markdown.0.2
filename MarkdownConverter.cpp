@@ -3,6 +3,15 @@
 MarkdownConverter::MarkdownConverter(string toInput)
 {
     inputLine = toInput;
+    previousLine = "";
+    nextLine = "";
+}
+
+MarkdownConverter::MarkdownConverter(string toInput, string toPreviousLine, string toNextLine)
+{
+    inputLine = toInput;
+    previousLine = toPreviousLine;
+    nextLine = toNextLine;
 }
     
 string MarkdownConverter::toBold()
@@ -21,11 +30,49 @@ string MarkdownConverter::toHeader()
     return retVal;
 }
 
-    string MarkdownConverter::toOneLineCode()
+string MarkdownConverter::toOneLineCode()
+{
+    return replaceNotation("`", "<code>", "</code>");
+}
+
+string MarkdownConverter::toList()
+{
+    string retVal = inputLine;
+
+    if (retVal[0] == '-')
     {
-        return replaceNotation("`", "<code>", "</code>");
+        retVal.replace(0,1,"<li>");
+        retVal.append("</li>");
+        if (previousLine[0] != '-')
+        {
+            retVal.insert(0,"<ul>\n");
+        }
+        if (nextLine[0] != '-')
+        {
+            retVal.append("\n</ul>");
+        }
+    }
+    if (isdigit(retVal[0]))
+    {
+        int i = 0;
+        while (isdigit(retVal[i]) || retVal[i] == '.')
+        {
+            i++;
+        }
+        retVal.replace(0,i,"<li>");
+        retVal.append("</li>");
+        if (!isdigit(previousLine[0]))
+        {
+            retVal.insert(0,"<ol>\n");
+        }
+        if (!isdigit(nextLine[0]))
+        {
+            retVal.append("\n</ol>");
+        }
     }
 
+    return retVal;
+}
 
 string MarkdownConverter::replaceNotation(string markdownSyntax, string HtmlStart, string HtmlEnd)
 {
