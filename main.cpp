@@ -75,9 +75,9 @@ TEST_CASE("toCode Test")
 	REQUIRE(mc5.toBold() == "*this is italics* <strong>and this is bold!</strong>");
 	
 }
-/**/
 
-/* 
+
+ 
 TEST_CASE("toList Unordered Test")
 {
 	string s1 = "- This is a list item!";
@@ -121,7 +121,7 @@ TEST_CASE("toList Ordered Test")
 }
 
 
-*/ 
+
 
 TEST_CASE("toLink Test")  
 { 
