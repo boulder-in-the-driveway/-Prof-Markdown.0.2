@@ -201,3 +201,15 @@ TEST_CASE("toHeader Test")
 	REQUIRE(mc2.toHeader() == "<h2>this will be a h2 header</h2>");
 	REQUIRE(mc3.toHeader() == "<h6>this will be a h6 header</h6>");
 }
+
+TEST_CASE("toHors Test")
+{
+	string s1 = "---";
+
+
+	MarkdownConverter mc1 = MarkdownConverter(s1);
+
+
+	REQUIRE(mc1.toHorsLine() == "<hr>");
+
+}

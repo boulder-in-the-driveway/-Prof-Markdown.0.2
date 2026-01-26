@@ -19,6 +19,7 @@ public:
     string toList();
     string toParagraph();
     string toImage();
+    string toHorsLine();
 
 
 private:

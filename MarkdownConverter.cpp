@@ -201,3 +201,13 @@ string MarkdownConverter::toParagraph()
 
     return retVal;
 }
+
+string MarkdownConverter::toHorsLine(){
+
+	string retVal = inputLine;
+		if(retVal == "---"){
+			retVal = "<hr>";
+
+	}
+	return retVal;
+}
