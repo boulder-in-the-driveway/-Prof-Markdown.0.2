@@ -81,6 +81,65 @@ TEST_CASE("toCode Test")
 */
 
 /*
+=======
+TEST_CASE("toList Unordered Test")
+{
+	string s1 = "- This is a list item!";
+	string s2 = "this is not a list item";
+
+	MarkdownConverter mc1 = MarkdownConverter(s1);
+	MarkdownConverter mc2 = MarkdownConverter(s2);
+	MarkdownConverter mc1_1 = MarkdownConverter(s1, s2, s2);
+	MarkdownConverter mc1_2 = MarkdownConverter(s1, s1, s1);
+	MarkdownConverter mc1_3 = MarkdownConverter(s1, s1, s2);
+	MarkdownConverter mc1_4 = MarkdownConverter(s1, s2, s1);
+
+	REQUIRE(mc1.toList() == "<ul>\n<li> This is a list item!</li>\n</ul>");
+	REQUIRE(mc2.toList() == s2);
+	REQUIRE(mc1_1.toList() == "<ul>\n<li> This is a list item!</li>\n</ul>");
+	REQUIRE(mc1_2.toList() == "<li> This is a list item!</li>");
+	REQUIRE(mc1_3.toList() == "<li> This is a list item!</li>\n</ul>");
+	REQUIRE(mc1_4.toList() == "<ul>\n<li> This is a list item!</li>");
+}
+TEST_CASE("toList Ordered Test")
+{
+	string s0 = "- This is a list item!";
+	string s = "this is not a list item";
+	string s1 = "1. This is the first item!";
+	string s2 = "2. This is the second item!";
+	string s3 = "3. This is the third item!";
+
+	MarkdownConverter mc1 = MarkdownConverter(s0);
+	MarkdownConverter mc2 = MarkdownConverter(s);
+	MarkdownConverter mc3 = MarkdownConverter(s1);
+	MarkdownConverter mc3_1 = MarkdownConverter(s1, s, s2);
+	MarkdownConverter mc4 = MarkdownConverter (s2, s1, s3);
+	MarkdownConverter mc5 = MarkdownConverter (s3, s2, s);
+
+	REQUIRE(mc1.toList() == "<ul>\n<li> This is a list item!</li>\n</ul>");
+	REQUIRE(mc2.toList() == s);
+	REQUIRE(mc3.toList() == "<ol>\n<li> This is the first item!</li>\n</ol>");
+	REQUIRE(mc3_1.toList() == "<ol>\n<li> This is the first item!</li>");
+	REQUIRE(mc4.toList() == "<li> This is the second item!</li>");
+	REQUIRE(mc5.toList() == "<li> This is the third item!</li>\n</ol>");
+}
+TEST_CASE("toLink Test")  
+{ 
+	string s1 = "`this is a link [Google](https://google.com)";
+	string s2 = "this is not a link";
+	string s3 = "this is not a link [but this is!](https://link.com)";
+	string s4 = "[Google](https://google.com) and [gitHub](https://github.com)";
+	string s5 = "[this is a link](https://google.com) ![and this is an image](data:image/jpeg;base64)";
+	string s6 = "![this is an image](data:image/jpeg;base64) [and this is a link](https://google.com)";
+
+  REQUIRE(mc1.toLink() == "this is a link! <a href=\"https://google.com\">Google</a>");
+	REQUIRE(mc2.toLink() == s2); 
+	REQUIRE(mc3.toLink() == "this is not a link <a href=\"https://link.com\">but this is!</a>");
+	REQUIRE(mc4.toLink() == "<a href=\"https://google.com\">Google</a> and <a href=\"https://github.com\">gitHub</a>");
+	REQUIRE(mc5.toLink() == "<a href=\"https://google.com\">this is a link</a> ![and this is an image](data:image/jpeg;base64)");
+	REQUIRE(mc6.toLink() == "![this is an image](data:image/jpeg;base64) <a href=\"https://google.com\">and this is a link</a>");
+}
+
 TEST_CASE("toParagraph Test")
 {
 	string s1 = "this will be a paragraph\n\n"; //needs to be directly connected to the sentence
@@ -88,9 +147,13 @@ TEST_CASE("toParagraph Test")
 	string s3 = "this will be a paragraph\n\n and this will not be";
 	//string s4 = "this will be a paragraph\n\n and this will be another one\n\n";
 
+
 	MarkdownConverter mc1 = MarkdownConverter(s1);
 	MarkdownConverter mc2 = MarkdownConverter(s2);
 	MarkdownConverter mc3 = MarkdownConverter(s3);
+	MarkdownConverter mc4 = MarkdownConverter(s4);
+	MarkdownConverter mc5 = MarkdownConverter(s5);
+	MarkdownConverter mc6 = MarkdownConverter(s6);
 	//MarkdownConverter mc4 = MarkdownConverter(s4);
 
 	REQUIRE(mc1.toParagraph() == "<p>this will be a paragraph</p>");
