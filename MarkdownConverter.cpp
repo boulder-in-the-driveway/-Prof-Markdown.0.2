@@ -28,7 +28,7 @@ string MarkdownConverter::toHeader()
 
 string MarkdownConverter::toLink()
 {
-    return " ";
+    return swapNotation("[", "]", '(', ")", "<a href=\"", "</a>");
 }
 
 string MarkdownConverter::replaceNotation(string markdownSyntax, string HtmlStart, string HtmlEnd)

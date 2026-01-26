@@ -82,7 +82,7 @@ TEST_CASE("toLink Test")
 	string s3 = "this is not a link [but this is!](https://link.com)";
 	string s4 = "[Google](https://google.com) and [gitHub](https://github.com)";
 	string s5 = "[this is a link](https://google.com) ![and this is an image](data:image/jpeg;base64)";
-	string s6 = "!this is an image](data:image/jpeg;base64) [and this is a link](https://google.com)";
+	string s6 = "![this is an image](data:image/jpeg;base64) [and this is a link](https://google.com)";
 
 
 	MarkdownConverter mc1 = MarkdownConverter(s1);
@@ -93,11 +93,11 @@ TEST_CASE("toLink Test")
 	MarkdownConverter mc6 = MarkdownConverter(s6);
 
 	
-	REQUIRE(mc1.toLink() == "<a href=\"https://google.com\">this is a link!</a>");
+	REQUIRE(mc1.toLink() == "this is a link! <a href=\"https://google.com\">Google</a>");
 	REQUIRE(mc2.toLink() == s2); 
-	REQUIRE(mc3.toLink() == "this is not a link <a href =\"https://link.com\">but this is</a>");
-	REQUIRE(mc4.toLink() == "<a href =\"https://google.com\">Google</a> and <a href =\"https://github.com\">gitHub</a>");
-	REQUIRE(mc5.toLink() == "<a href =\"https://google.com\">this is a link</a> ![and this is an image](data:image/jpeg;base64)");
-	REQUIRE(mc6.toLink() == "![this is an image](data:image/jpeg;base64) <a href =\"https://google.com\">and this is a link</a>");
+	REQUIRE(mc3.toLink() == "this is not a link <a href=\"https://link.com\">but this is!</a>");
+	REQUIRE(mc4.toLink() == "<a href=\"https://google.com\">Google</a> and <a href=\"https://github.com\">gitHub</a>");
+	REQUIRE(mc5.toLink() == "<a href=\"https://google.com\">this is a link</a> ![and this is an image](data:image/jpeg;base64)");
+	REQUIRE(mc6.toLink() == "![this is an image](data:image/jpeg;base64) <a href=\"https://google.com\">and this is a link</a>");
 
 }
