@@ -18,6 +18,7 @@ public:
     string toLink();
     string toList();
     string toParagraph();
+    string toImage();
 
 
 private:
@@ -29,4 +30,5 @@ private:
     string nextLine;
     string replaceNotation(string markdownSyntax, string HtmlStart, string HtmlEnd);
     string replaceNotationOneLine(string markdownSyntax, string HtmlStart, string HtmlEnd);
+    string swapNotation(string firstPart, string secondPart, char thirdPart, string fourthPart, string htmlOpen, string htmlClosed);
 };
