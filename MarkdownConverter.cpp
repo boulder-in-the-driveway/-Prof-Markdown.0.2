@@ -103,3 +103,27 @@ string MarkdownConverter::replaceNotationOneLine(string markdownSyntax, string H
 {
     return "";
 }
+
+
+string MarkdownConverter::toParagraph()
+{
+    string retVal = inputLine;
+    size_t pos = retVal.find("\n\n"); //look for the characters for the paragraph
+
+    if (pos != string::npos){
+
+        string before = retVal.substr(0, pos); //breaks up the continued string
+        string after = retVal.substr(pos + 2); //so we don't put tags on all of it
+
+        // trim trailing space from paragraph
+        while (!before.empty() && before.back() == ' ')
+        { //we don't want a space
+            before.pop_back();
+        }
+
+        retVal = "<p>" + before + "</p>" + after; //puts in the tags, 
+        //and includes the remaining string 
+    }
+
+    return retVal;
+}
