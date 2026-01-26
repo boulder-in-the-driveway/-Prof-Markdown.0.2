@@ -96,11 +96,35 @@ string MarkdownConverter::toList()
 }
 string MarkdownConverter::toLink()
 {
-    return swapNotation("[", "]", '(', ")", "<a href=\"", "</a>");
+    string retVal = inputLine;
+
+    for(int i = 0; i < retVal.length(); i++)
+    {
+        if(retVal[i] == '[' && retVal[i-1] != '!'){
+            size_t textEnd = retVal.find(']', i);
+            size_t urlStart = retVal.find('(', textEnd);
+            size_t urlEnd = retVal.find(')', urlStart);
+
+            if (textEnd != string::npos &&
+                    urlStart != string::npos &&
+                    urlEnd != string::npos) {
+                    string text = retVal.substr(i + 1, textEnd - i - 1);
+                    string url  = retVal.substr(urlStart + 1, urlEnd - urlStart - 1);
+                    string html = "<a href=\"" + url + "\">" + text + "</a>";
+
+                    // Replace markdown with HTML
+                    retVal.replace(i, urlEnd - i + 1, html);
+
+                    // Move index past inserted HTML
+                    i += html.size() - 1;
+            }
+        }
+    }
+    return retVal;
+}
 
     
 
-}
 
 string MarkdownConverter::replaceNotation(string markdownSyntax, string HtmlStart, string HtmlEnd)
 {
