@@ -15,8 +15,10 @@ public:
     string toItalic();
     string toHeader();
     string toOneLineCode();
+    string toLink();
     string toList();
     string toParagraph();
+
 
 private:
     //-- The line of Markdown before the current line, if there is one

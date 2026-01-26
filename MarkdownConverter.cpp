@@ -71,7 +71,13 @@ string MarkdownConverter::toList()
         }
     }
 
-    return retVal;
+
+string MarkdownConverter::toLink()
+{
+    return swapNotation("[", "]", '(', ")", "<a href=\"", "</a>");
+
+    
+
 }
 
 string MarkdownConverter::replaceNotation(string markdownSyntax, string HtmlStart, string HtmlEnd)
