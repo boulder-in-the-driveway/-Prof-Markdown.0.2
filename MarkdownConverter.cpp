@@ -23,48 +23,7 @@ string MarkdownConverter::toHeader()
 
 string MarkdownConverter::toImage()
 {
-    string retVal = inputLine;
-    size_t searchPosition = 0;
-
-    while (retVal.find("![", searchPosition) != string::npos)
-    {
-        size_t imageStart = retVal.find("![", searchPosition);
-        if (imageStart == string::npos) break; 
-
-        size_t altTextEnd = retVal.find(']', imageStart);
-        if (altTextEnd == string::npos)
-        {
-            searchPosition = imageStart + 2; 
-            continue;
-        }
-
-        if (altTextEnd + 1 >= retVal.size() || retVal[altTextEnd + 1] != '(')
-        {
-            searchPosition = altTextEnd + 1; 
-            continue;
-        }
-
-        size_t urlStart = altTextEnd + 2;               
-        size_t urlEnd = retVal.find(')', urlStart);     
-        if (urlEnd == string::npos)
-        {
-            searchPosition = urlStart; 
-            continue;
-        }
-
-        string altText = retVal.substr(imageStart + 2, altTextEnd - (imageStart + 2));
-        string imageUrl = retVal.substr(urlStart, urlEnd - urlStart);
-
-        
-        string htmlFormat = "<img src=\"" + imageUrl + "\" alt=\"" + altText + "\">";
-
-        
-        retVal.replace(imageStart, urlEnd - imageStart + 1, htmlFormat);
-
-        searchPosition = imageStart + htmlFormat.size();
-    }
-
-    return retVal;
+    return swapNotation("![", "]", '(', ")", "<img src=\"", "\" alt=\"");
 }
 
 string MarkdownConverter::toOneLineCode()
@@ -101,6 +60,52 @@ string MarkdownConverter::replaceNotation(string markdownSyntax, string HtmlStar
 string MarkdownConverter::replaceNotationOneLine(string markdownSyntax, string HtmlStart, string HtmlEnd)
 {
     return "";
+}
+
+string MarkdownConverter::swapNotation(string firstPart, string secondPart, char thirdPart, string fourthPart, string htmlOpen, string htmlClosed)
+{
+    string retVal = inputLine;
+    size_t searchPosition = 0;
+
+    while (retVal.find(firstPart, searchPosition) != string::npos)
+    {
+        size_t imageStart = retVal.find(firstPart, searchPosition);
+        if (imageStart == string::npos) break; 
+
+        size_t altTextEnd = retVal.find(secondPart, imageStart);
+        if (altTextEnd == string::npos)
+        {
+            searchPosition = imageStart + 2; 
+            continue;
+        }
+
+        if (altTextEnd + 1 >= retVal.size() || retVal[altTextEnd + 1] != thirdPart)
+        {
+            searchPosition = altTextEnd + 1; 
+            continue;
+        }
+
+        size_t urlStart = altTextEnd + 2;               
+        size_t urlEnd = retVal.find(fourthPart, urlStart);     
+        if (urlEnd == string::npos)
+        {
+            searchPosition = urlStart; 
+            continue;
+        }
+
+        string altText = retVal.substr(imageStart + 2, altTextEnd - (imageStart + 2));
+        string imageUrl = retVal.substr(urlStart, urlEnd - urlStart);
+
+        
+        string htmlFormat = htmlOpen + imageUrl + htmlClosed + altText + "\">";
+
+        
+        retVal.replace(imageStart, urlEnd - imageStart + 1, htmlFormat);
+
+        searchPosition = imageStart + htmlFormat.size();
+    }
+
+    return retVal;
 }
 
 
