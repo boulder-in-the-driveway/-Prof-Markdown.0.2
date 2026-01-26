@@ -24,10 +24,26 @@ string MarkdownConverter::toItalic()
     return replaceNotation("*", "<em>", "</em>");
 }
 
-string MarkdownConverter::toHeader()
+	string MarkdownConverter::toHeader()
 {
-    string retVal = "";
-    return retVal;
+
+	string retVal = inputLine;
+    
+	if (retVal[0] == '#')
+	{
+        int i = 1;
+        while(retVal[i] == '#'){
+            i++;
+        }
+        
+        string startNotation = "<h" + to_string(i) + '>';
+        string endNotation = "</h" + to_string(i) + '>';
+
+		retVal.replace(0, i, startNotation);
+		retVal.append(endNotation);
+	}
+
+	return retVal;
 }
 
 string MarkdownConverter::toImage()
@@ -75,6 +91,7 @@ string MarkdownConverter::toList()
             retVal.append("\n</ol>");
         }
     }
+    return retVal;
 
 }
 string MarkdownConverter::toLink()

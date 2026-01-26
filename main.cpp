@@ -5,8 +5,7 @@
 #include "MarkdownConverter.h"
 using namespace std;
 
-//--
-/*
+
 TEST_CASE("toBold Test")  
 { 
 	string s1 = "**this is bold!**";
@@ -27,8 +26,7 @@ TEST_CASE("toBold Test")
 	REQUIRE(mc4.toBold() == "<strong>bold</strong> and <strong>bold</strong>");
 	REQUIRE(mc5.toBold() == "*this is italics* <strong>and this is bold!</strong>");
 }
-	*/
-/*
+	
 TEST_CASE("toItalics Test")  
 { 
 	string s1 = "*this is italic!*";
@@ -51,8 +49,7 @@ TEST_CASE("toItalics Test")
 	REQUIRE(mc4.toItalic() == "<em>italic</em> and <em>italic</em>");
 	REQUIRE(mc5_1.toItalic() == "<em>this is italics</em> <strong>and this is bold!</strong>");
 }
-*/
-/*
+
 TEST_CASE("toCode Test")  
 { 
 	string s1 = "`this is code!`";
@@ -78,10 +75,9 @@ TEST_CASE("toCode Test")
 	REQUIRE(mc5.toBold() == "*this is italics* <strong>and this is bold!</strong>");
 	
 }
-*/
+/**/
 
-/*
-=======
+/* 
 TEST_CASE("toList Unordered Test")
 {
 	string s1 = "- This is a list item!";
@@ -123,6 +119,9 @@ TEST_CASE("toList Ordered Test")
 	REQUIRE(mc4.toList() == "<li> This is the second item!</li>");
 	REQUIRE(mc5.toList() == "<li> This is the third item!</li>\n</ol>");
 }
+
+
+
 TEST_CASE("toLink Test")  
 { 
 	string s1 = "`this is a link [Google](https://google.com)";
@@ -139,7 +138,7 @@ TEST_CASE("toLink Test")
 	REQUIRE(mc5.toLink() == "<a href=\"https://google.com\">this is a link</a> ![and this is an image](data:image/jpeg;base64)");
 	REQUIRE(mc6.toLink() == "![this is an image](data:image/jpeg;base64) <a href=\"https://google.com\">and this is a link</a>");
 }
-
+*/
 TEST_CASE("toParagraph Test")
 {
 	string s1 = "this will be a paragraph\n\n"; //needs to be directly connected to the sentence
@@ -151,9 +150,7 @@ TEST_CASE("toParagraph Test")
 	MarkdownConverter mc1 = MarkdownConverter(s1);
 	MarkdownConverter mc2 = MarkdownConverter(s2);
 	MarkdownConverter mc3 = MarkdownConverter(s3);
-	MarkdownConverter mc4 = MarkdownConverter(s4);
-	MarkdownConverter mc5 = MarkdownConverter(s5);
-	MarkdownConverter mc6 = MarkdownConverter(s6);
+
 	//MarkdownConverter mc4 = MarkdownConverter(s4);
 
 	REQUIRE(mc1.toParagraph() == "<p>this will be a paragraph</p>");
@@ -161,7 +158,7 @@ TEST_CASE("toParagraph Test")
 	REQUIRE(mc3.toParagraph() == "<p>this will be a paragraph</p> and this will not be");
 	//REQUIRE(mc4.toParagraph() == "<p>this will be a paragraph</p> <p>and this will be another one</p>");
 }
-*/
+
 
 
 TEST_CASE("toImage Test")  
@@ -188,4 +185,19 @@ TEST_CASE("toImage Test")
 	REQUIRE(mc4.toImage() == "<img src=\"/path/to/img.jpg\" alt=\"this is an image\"> and <img src=\"/path/to/img.jpg\" alt=\"this is an image\">");
 	REQUIRE(mc5.toImage() == "[this is a not an image](/path/to/img.jpg) and <img src=\"/path/to/img.jpg\" alt=\"this is an image\">");
 	
+}
+
+TEST_CASE("toHeader Test")
+{
+	string s1 = "#this will be a header";
+	string s2 = "##this will be a h2 header";
+	string s3 = "######this will be a h6 header";
+
+	MarkdownConverter mc1 = MarkdownConverter(s1);
+	MarkdownConverter mc2 = MarkdownConverter(s2);
+	MarkdownConverter mc3 = MarkdownConverter(s3);
+
+	REQUIRE(mc1.toHeader() == "<h1>this will be a header</h1>");
+	REQUIRE(mc2.toHeader() == "<h2>this will be a h2 header</h2>");
+	REQUIRE(mc3.toHeader() == "<h6>this will be a h6 header</h6>");
 }
