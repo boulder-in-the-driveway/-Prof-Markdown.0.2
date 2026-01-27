@@ -225,3 +225,8 @@ TEST_CASE("toHors Test")
 	REQUIRE(mc1.toHorsLine() == "<hr>");
 
 }
+
+TEST_CASE ("fileFormatter Test")
+{
+	
+}
