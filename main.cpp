@@ -64,7 +64,7 @@ TEST_CASE("toCode Test")
 }
 
 
-/*
+
 TEST_CASE("toList Unordered Test")
 {
 	string s1 = "- This is a list item!";
@@ -109,7 +109,7 @@ TEST_CASE("toList Ordered Test")
 	REQUIRE(mc5.toList() == "<li> This is the third item!</li>\n</ol>");
 	REQUIRE(mc6.toList() == "<li> Item 4</li>\n</ol>");
 }
-*/
+
 
 
 
@@ -216,6 +216,6 @@ TEST_CASE("toHors Test")
 TEST_CASE ("fileFormatter Test")
 {
 	fileFormatter file1 = fileFormatter("/workspaces/-Prof-Markdown.0.2/-Prof-Markdown.txt");
-	//REQUIRE(file1.getLine(2) == "<p>This is some basic, sample markdown.</p>");
+	REQUIRE(file1.getLine(2) == "<p>This is some basic, sample markdown.</p>");
 	REQUIRE(file1.getLine(0) == "<h1> Sample Markdown</h1>");
 }

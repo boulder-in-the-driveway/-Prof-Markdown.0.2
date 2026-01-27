@@ -19,15 +19,15 @@ string MarkdownConverter::runConverter()
 {
     if (inputLine != "")
     {
-        toBold();
-        toItalic();
-        toHeader();
-        toOneLineCode();
-        toLink();
-        toList();
-        toParagraph();
-        toImage();
-        toHorsLine();
+        inputLine = toBold();
+        inputLine = toItalic();
+        inputLine = toHeader();
+        inputLine = toOneLineCode();
+        inputLine = toLink();
+        inputLine = toList();
+        inputLine = toParagraph();
+        inputLine = toImage();
+        inputLine = toHorsLine();
     }
     return inputLine;
 }
