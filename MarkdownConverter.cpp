@@ -82,7 +82,7 @@ string MarkdownConverter::toList()
     {
         retVal.replace(0,1,"<li>");
         retVal.append("</li>");
-        if (previousLine[0] != '-')
+        if (previousLine.substr(0, 3) != "<li>")
         {
             retVal.insert(0,"<ul>\n");
         }
@@ -100,7 +100,7 @@ string MarkdownConverter::toList()
         }
         retVal.replace(0,i,"<li>");
         retVal.append("</li>");
-        if (!isdigit(previousLine[0]))
+        if (previousLine.substr(0, 3) != "<li>")
         {
             retVal.insert(0,"<ol>\n");
         }
