@@ -13,6 +13,20 @@ MarkdownConverter::MarkdownConverter(string toInput, string toPreviousLine, stri
     previousLine = toPreviousLine;
     nextLine = toNextLine;
 }
+
+string MarkdownConverter::runConverter()
+{
+    toBold();
+    toItalic();
+    toHeader();
+    toOneLineCode();
+    toLink();
+    toList();
+    toParagraph();
+    toImage();
+    toHorsLine();
+    return inputLine;
+}
     
 string MarkdownConverter::toBold()
 {

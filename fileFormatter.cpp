@@ -31,3 +31,8 @@ void fileFormatter::readFileLines(const string& filePath)
         cout<<"Cannot open the file: "<<filePath<<endl; 
     } 
 }
+
+void fileFormatter::convertMDtoHTML(int pos)
+{
+    
+}

@@ -10,6 +10,8 @@ class MarkdownConverter
 public:
     MarkdownConverter(string toInput);
     MarkdownConverter(string toInput, string toPreviousLine, string toNextLine);
+
+    string runConverter();
     //toBold must ALWAYS be called before toItalic
     string toBold();
     string toItalic();
