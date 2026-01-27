@@ -104,6 +104,7 @@ TEST_CASE("toList Ordered Test")
 	string s1 = "1. This is the first item!";
 	string s2 = "2. This is the second item!";
 	string s3 = "3. This is the third item!";
+	string s4 = "4. Item 4";
 
 	MarkdownConverter mc1 = MarkdownConverter(s0);
 	MarkdownConverter mc2 = MarkdownConverter(s);
@@ -111,6 +112,7 @@ TEST_CASE("toList Ordered Test")
 	MarkdownConverter mc3_1 = MarkdownConverter(s1, s, s2);
 	MarkdownConverter mc4 = MarkdownConverter (s2, s1, s3);
 	MarkdownConverter mc5 = MarkdownConverter (s3, s2, s);
+	MarkdownConverter mc6 = MarkdownConverter (s4, s3,s );
 
 	REQUIRE(mc1.toList() == "<ul>\n<li> This is a list item!</li>\n</ul>");
 	REQUIRE(mc2.toList() == s);
@@ -118,6 +120,7 @@ TEST_CASE("toList Ordered Test")
 	REQUIRE(mc3_1.toList() == "<ol>\n<li> This is the first item!</li>");
 	REQUIRE(mc4.toList() == "<li> This is the second item!</li>");
 	REQUIRE(mc5.toList() == "<li> This is the third item!</li>\n</ol>");
+	REQUIRE(mc6.toList() == "<li> Item 4</li> \n</ol>");
 }
 
 
@@ -138,7 +141,6 @@ TEST_CASE("toLink Test")
 	MarkdownConverter mc4 = MarkdownConverter(s4);
 	MarkdownConverter mc5 = MarkdownConverter(s5);
 	MarkdownConverter mc6 = MarkdownConverter(s6);
-
 
   	REQUIRE(mc1.toLink() == "this is a link! <a href=\"https://google.com\">Google</a>");
 	REQUIRE(mc2.toLink() == s2); 
