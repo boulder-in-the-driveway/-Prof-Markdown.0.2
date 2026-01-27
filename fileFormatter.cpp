@@ -38,8 +38,8 @@ void fileFormatter::readFileLines(const string& filePath)
 
 void fileFormatter::convertMDtoHTML(int pos)
 {
-    if (pos != 0 && pos != eachLine.size())
-    {
+    int last = eachLine.size() -1;
+    if(pos > 0 && pos < last){
         MarkdownConverter line = MarkdownConverter(eachLine[pos], eachLine[pos-1], eachLine[pos+1]);
         string temp = line.runConverter();
         eachLine[pos] = temp;

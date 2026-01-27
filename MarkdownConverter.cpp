@@ -10,6 +10,7 @@ MarkdownConverter::MarkdownConverter(string toInput)
 MarkdownConverter::MarkdownConverter(string toInput, string toPreviousLine, string toNextLine)
 {
     inputLine = toInput;
+    //cout << inputLine <<endl;
     previousLine = toPreviousLine;
     nextLine = toNextLine;
 }
@@ -28,7 +29,6 @@ string MarkdownConverter::runConverter()
         toImage();
         toHorsLine();
     }
-    cout << inputLine << endl;
     return inputLine;
 }
     
@@ -42,7 +42,7 @@ string MarkdownConverter::toItalic()
     return replaceNotation("*", "<em>", "</em>");
 }
 
-	string MarkdownConverter::toHeader()
+string MarkdownConverter::toHeader()
 {
 
 	string retVal = inputLine;
