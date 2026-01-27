@@ -3,6 +3,10 @@
 fileFormatter::fileFormatter(string filePath)
 {
     readFileLines(filePath);
+    for (int i = 0; i < eachLine.size(); i++)
+    {
+        convertMDtoHTML(i);
+    }
     //convert and replace each line
     //create new HTML doc
 }
@@ -34,19 +38,25 @@ void fileFormatter::readFileLines(const string& filePath)
 
 void fileFormatter::convertMDtoHTML(int pos)
 {
-    if (pos != 0 || pos != eachLine.size())
+    if (pos != 0 && pos != eachLine.size())
     {
         MarkdownConverter line = MarkdownConverter(eachLine[pos], eachLine[pos-1], eachLine[pos+1]);
-        eachLine[pos] = line.runConverter();
+        string temp = line.runConverter();
+        eachLine[pos] = temp;
+        //cout << temp << endl;
     }
     else if (pos == 0)
     {
         MarkdownConverter line = MarkdownConverter(eachLine[pos], "", eachLine[pos+1]);
-        eachLine[pos] = line.runConverter();
+        string temp = line.runConverter();
+        eachLine[pos] = temp;
+        //cout << temp << endl;
     }
     else
     {
         MarkdownConverter line = MarkdownConverter(eachLine[pos], eachLine[pos-1], "");
-        eachLine[pos] = line.runConverter();
+        string temp = line.runConverter();
+        eachLine[pos] = temp;
+        //cout << temp << endl;
     }
 }

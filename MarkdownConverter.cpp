@@ -16,15 +16,19 @@ MarkdownConverter::MarkdownConverter(string toInput, string toPreviousLine, stri
 
 string MarkdownConverter::runConverter()
 {
-    toBold();
-    toItalic();
-    toHeader();
-    toOneLineCode();
-    toLink();
-    toList();
-    toParagraph();
-    toImage();
-    toHorsLine();
+    if (inputLine != "")
+    {
+        toBold();
+        toItalic();
+        toHeader();
+        toOneLineCode();
+        toLink();
+        toList();
+        toParagraph();
+        toImage();
+        toHorsLine();
+    }
+    cout << inputLine << endl;
     return inputLine;
 }
     
