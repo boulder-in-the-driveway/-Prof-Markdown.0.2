@@ -1,0 +1,13 @@
+**this is bold!**
+this is not bold
+this is not bold **but this is!**
+**bold** and **bold**
+*this is italics* **and this is bold!**
+*this is italic!*
+this is not italic
+this is not italic *but this is!*
+*italic* and *italic*
+`this is code!`
+this is not bold **but this is!**
+**bold** and **bold**
+	string s5 = "*this is italics* **and this is bold!**
