@@ -7,7 +7,7 @@ fileFormatter::fileFormatter(string filePath)
     {
         convertMDtoHTML(i);
     }
-    //convert and replace each line
+    printToConsole();
     //create new HTML doc
 }
 
@@ -43,20 +43,25 @@ void fileFormatter::convertMDtoHTML(int pos)
         MarkdownConverter line = MarkdownConverter(eachLine[pos], eachLine[pos-1], eachLine[pos+1]);
         string temp = line.runConverter();
         eachLine[pos] = temp;
-        //cout << temp << endl;
     }
     else if (pos == 0)
     {
         MarkdownConverter line = MarkdownConverter(eachLine[pos], "", eachLine[pos+1]);
         string temp = line.runConverter();
         eachLine[pos] = temp;
-        //cout << temp << endl;
     }
     else
     {
         MarkdownConverter line = MarkdownConverter(eachLine[pos], eachLine[pos-1], "");
         string temp = line.runConverter();
         eachLine[pos] = temp;
-        //cout << temp << endl;
+    }
+}
+
+void fileFormatter::printToConsole()
+{
+    for (int i = 0; i < eachLine.size(); i++)
+    {
+        cout << eachLine[i] << endl;
     }
 }

@@ -24,10 +24,10 @@ string MarkdownConverter::runConverter()
         inputLine = toHeader();
         inputLine = toOneLineCode();
         inputLine = toLink();
+        inputLine = toHorsLine();
         inputLine = toList();
         inputLine = toParagraph();
         inputLine = toImage();
-        inputLine = toHorsLine();
     }
     return inputLine;
 }
