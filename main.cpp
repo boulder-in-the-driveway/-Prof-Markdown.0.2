@@ -3,6 +3,7 @@
 #define CATCH_CONFIG_MAIN   
 #include "catch.hpp"
 #include "MarkdownConverter.h"
+#include "fileFormatter.h"
 using namespace std;
 
 
@@ -106,7 +107,7 @@ TEST_CASE("toList Ordered Test")
 	REQUIRE(mc3_1.toList() == "<ol>\n<li> This is the first item!</li>");
 	REQUIRE(mc4.toList() == "<li> This is the second item!</li>");
 	REQUIRE(mc5.toList() == "<li> This is the third item!</li>\n</ol>");
-	REQUIRE(mc6.toList() == "<li> Item 4</li> \n</ol>");
+	REQUIRE(mc6.toList() == "<li> Item 4</li>\n</ol>");
 }
 
 
@@ -214,5 +215,7 @@ TEST_CASE("toHors Test")
 
 TEST_CASE ("fileFormatter Test")
 {
-
+	fileFormatter file1 = fileFormatter("/workspaces/-Prof-Markdown.0.2/-Prof-Markdown.txt");
+	REQUIRE(file1.getLine(2) == "This is some basic, sample markdown.");
+	REQUIRE(file1.getLine(0) == "# Sample Markdown");
 }
