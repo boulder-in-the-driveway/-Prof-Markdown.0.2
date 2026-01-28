@@ -82,6 +82,10 @@ void fileFormatter::newHTML()
     MyFile << "</head>" << endl;
     MyFile << "<body>" << endl;
 
+    for (int i = 0; i < eachLine.size(); i++)
+    {
+        MyFile << eachLine[i] << endl;
+    }
 
     MyFile << "</body>" << endl;
     MyFile << "</html>";
