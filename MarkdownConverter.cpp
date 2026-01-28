@@ -22,7 +22,7 @@ string MarkdownConverter::runConverter()
         inputLine = toBold();
         inputLine = toItalic();
         inputLine = toHeader();
-        inputLine = toOneLineCode();
+        //inputLine = toOneLineCode();
         inputLine = toLink();
         inputLine = toHorsLine();
         inputLine = toList();
