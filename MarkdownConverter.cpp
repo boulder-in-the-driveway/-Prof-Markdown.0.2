@@ -82,7 +82,7 @@ string MarkdownConverter::toList()
     {
         retVal.replace(0,1,"<li>");
         retVal.append("</li>");
-        if (previousLine.substr(0, 3) != "<li>")
+        if ((previousLine.substr(0, 4) != "<li>" && previousLine.substr(0, 5) != "<ul>\n"))
         {
             retVal.insert(0,"<ul>\n");
         }
@@ -100,7 +100,7 @@ string MarkdownConverter::toList()
         }
         retVal.replace(0,i,"<li>");
         retVal.append("</li>");
-        if (previousLine.substr(0, 3) != "<li>")
+        if (previousLine.substr(0, 4) != "<li>" && previousLine.substr(0, 5) != "<ol>\n")
         {
             retVal.insert(0,"<ol>\n");
         }

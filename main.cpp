@@ -69,12 +69,13 @@ TEST_CASE("toList Unordered Test")
 {
 	string s1 = "- This is a list item!";
 	string s2 = "this is not a list item";
+	string s3 = "<li> This is a converted item!</li>";
 
 	MarkdownConverter mc1 = MarkdownConverter(s1);
 	MarkdownConverter mc2 = MarkdownConverter(s2);
 	MarkdownConverter mc1_1 = MarkdownConverter(s1, s2, s2);
-	MarkdownConverter mc1_2 = MarkdownConverter(s1, s1, s1);
-	MarkdownConverter mc1_3 = MarkdownConverter(s1, s1, s2);
+	MarkdownConverter mc1_2 = MarkdownConverter(s1, s3, s1);
+	MarkdownConverter mc1_3 = MarkdownConverter(s1, s3, s2);
 	MarkdownConverter mc1_4 = MarkdownConverter(s1, s2, s1);
 
 	REQUIRE(mc1.toList() == "<ul>\n<li> This is a list item!</li>\n</ul>");
@@ -92,14 +93,15 @@ TEST_CASE("toList Ordered Test")
 	string s2 = "2. This is the second item!";
 	string s3 = "3. This is the third item!";
 	string s4 = "4. Item 4";
+	string s5 = "<li> This item was converted!</li>";
 
 	MarkdownConverter mc1 = MarkdownConverter(s0);
 	MarkdownConverter mc2 = MarkdownConverter(s);
 	MarkdownConverter mc3 = MarkdownConverter(s1);
 	MarkdownConverter mc3_1 = MarkdownConverter(s1, s, s2);
-	MarkdownConverter mc4 = MarkdownConverter (s2, s1, s3);
-	MarkdownConverter mc5 = MarkdownConverter (s3, s2, s);
-	MarkdownConverter mc6 = MarkdownConverter (s4, s3,s );
+	MarkdownConverter mc4 = MarkdownConverter (s2, s5, s3);
+	MarkdownConverter mc5 = MarkdownConverter (s3, s5, s);
+	MarkdownConverter mc6 = MarkdownConverter (s4, s5,s );
 
 	REQUIRE(mc1.toList() == "<ul>\n<li> This is a list item!</li>\n</ul>");
 	REQUIRE(mc2.toList() == s);
