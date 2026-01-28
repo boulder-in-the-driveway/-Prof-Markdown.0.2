@@ -10,8 +10,26 @@ MarkdownConverter::MarkdownConverter(string toInput)
 MarkdownConverter::MarkdownConverter(string toInput, string toPreviousLine, string toNextLine)
 {
     inputLine = toInput;
+    //cout << inputLine <<endl;
     previousLine = toPreviousLine;
     nextLine = toNextLine;
+}
+
+string MarkdownConverter::runConverter()
+{
+    if (inputLine != "")
+    {
+        inputLine = toBold();
+        inputLine = toItalic();
+        inputLine = toHeader();
+        inputLine = toOneLineCode();
+        inputLine = toLink();
+        inputLine = toHorsLine();
+        inputLine = toList();
+        inputLine = toParagraph();
+        inputLine = toImage();
+    }
+    return inputLine;
 }
     
 string MarkdownConverter::toBold()
@@ -24,7 +42,7 @@ string MarkdownConverter::toItalic()
     return replaceNotation("*", "<em>", "</em>");
 }
 
-	string MarkdownConverter::toHeader()
+string MarkdownConverter::toHeader()
 {
 
 	string retVal = inputLine;
@@ -64,7 +82,7 @@ string MarkdownConverter::toList()
     {
         retVal.replace(0,1,"<li>");
         retVal.append("</li>");
-        if (previousLine[0] != '-')
+        if ((previousLine.substr(0, 4) != "<li>" && previousLine.substr(0, 5) != "<ul>\n"))
         {
             retVal.insert(0,"<ul>\n");
         }
@@ -82,7 +100,7 @@ string MarkdownConverter::toList()
         }
         retVal.replace(0,i,"<li>");
         retVal.append("</li>");
-        if (!isdigit(previousLine[0]))
+        if (previousLine.substr(0, 4) != "<li>" && previousLine.substr(0, 5) != "<ol>\n")
         {
             retVal.insert(0,"<ol>\n");
         }
@@ -229,9 +247,8 @@ string MarkdownConverter::toParagraph()
 string MarkdownConverter::toHorsLine(){
 
 	string retVal = inputLine;
-		if(retVal == "---"){
+		if(retVal == "---" || retVal == "--- "){
 			retVal = "<hr>";
-
 	}
 	return retVal;
 }

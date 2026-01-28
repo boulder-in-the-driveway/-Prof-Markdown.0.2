@@ -3,6 +3,7 @@
 #define CATCH_CONFIG_MAIN   
 #include "catch.hpp"
 #include "MarkdownConverter.h"
+#include "fileFormatter.h"
 using namespace std;
 
 
@@ -53,41 +54,28 @@ TEST_CASE("toItalics Test")
 TEST_CASE("toCode Test")  
 { 
 	string s1 = "`this is code!`";
-	string s2 = "this is not bold";
-	string s3 = "this is not bold **but this is!**";
-	string s4 = "**bold** and **bold**";
-	string s5 = "*this is italics* **and this is bold!**";
-	
+	string s2 = "this is not code";
 
 	MarkdownConverter mc1 = MarkdownConverter(s1);
-	
 	MarkdownConverter mc2 = MarkdownConverter(s2);
-	MarkdownConverter mc3 = MarkdownConverter(s3);
-	MarkdownConverter mc4 = MarkdownConverter(s4);
-	MarkdownConverter mc5 = MarkdownConverter(s5);
 	
-
 	REQUIRE(mc1.toOneLineCode() == "<code>this is code!</code>");
-	
-	REQUIRE(mc2.toBold() == s2); 
-	REQUIRE(mc3.toBold() == "this is not bold <strong>but this is!</strong>");
-	REQUIRE(mc4.toBold() == "<strong>bold</strong> and <strong>bold</strong>");
-	REQUIRE(mc5.toBold() == "*this is italics* <strong>and this is bold!</strong>");
-	
+	REQUIRE(mc2.toOneLineCode() == s2);
 }
 
 
- 
+
 TEST_CASE("toList Unordered Test")
 {
 	string s1 = "- This is a list item!";
 	string s2 = "this is not a list item";
+	string s3 = "<li> This is a converted item!</li>";
 
 	MarkdownConverter mc1 = MarkdownConverter(s1);
 	MarkdownConverter mc2 = MarkdownConverter(s2);
 	MarkdownConverter mc1_1 = MarkdownConverter(s1, s2, s2);
-	MarkdownConverter mc1_2 = MarkdownConverter(s1, s1, s1);
-	MarkdownConverter mc1_3 = MarkdownConverter(s1, s1, s2);
+	MarkdownConverter mc1_2 = MarkdownConverter(s1, s3, s1);
+	MarkdownConverter mc1_3 = MarkdownConverter(s1, s3, s2);
 	MarkdownConverter mc1_4 = MarkdownConverter(s1, s2, s1);
 
 	REQUIRE(mc1.toList() == "<ul>\n<li> This is a list item!</li>\n</ul>");
@@ -105,14 +93,15 @@ TEST_CASE("toList Ordered Test")
 	string s2 = "2. This is the second item!";
 	string s3 = "3. This is the third item!";
 	string s4 = "4. Item 4";
+	string s5 = "<li> This item was converted!</li>";
 
 	MarkdownConverter mc1 = MarkdownConverter(s0);
 	MarkdownConverter mc2 = MarkdownConverter(s);
 	MarkdownConverter mc3 = MarkdownConverter(s1);
 	MarkdownConverter mc3_1 = MarkdownConverter(s1, s, s2);
-	MarkdownConverter mc4 = MarkdownConverter (s2, s1, s3);
-	MarkdownConverter mc5 = MarkdownConverter (s3, s2, s);
-	MarkdownConverter mc6 = MarkdownConverter (s4, s3,s );
+	MarkdownConverter mc4 = MarkdownConverter (s2, s5, s3);
+	MarkdownConverter mc5 = MarkdownConverter (s3, s5, s);
+	MarkdownConverter mc6 = MarkdownConverter (s4, s5,s );
 
 	REQUIRE(mc1.toList() == "<ul>\n<li> This is a list item!</li>\n</ul>");
 	REQUIRE(mc2.toList() == s);
@@ -120,7 +109,7 @@ TEST_CASE("toList Ordered Test")
 	REQUIRE(mc3_1.toList() == "<ol>\n<li> This is the first item!</li>");
 	REQUIRE(mc4.toList() == "<li> This is the second item!</li>");
 	REQUIRE(mc5.toList() == "<li> This is the third item!</li>\n</ol>");
-	REQUIRE(mc6.toList() == "<li> Item 4</li> \n</ol>");
+	REQUIRE(mc6.toList() == "<li> Item 4</li>\n</ol>");
 }
 
 
@@ -224,4 +213,14 @@ TEST_CASE("toHors Test")
 
 	REQUIRE(mc1.toHorsLine() == "<hr>");
 
+}
+
+TEST_CASE ("fileFormatter Test")
+{
+	fileFormatter file1 = fileFormatter("/workspaces/-Prof-Markdown.0.2/-Prof-Markdown.txt");
+	REQUIRE(file1.getLine(0) == "<h1> Assignment 1: Acceptance Test</h1>");
+	//REQUIRE(file1.getLine(2) == "<p>This is some basic, sample markdown.</p>");
+	REQUIRE(file1.getLine(5) == "<hr>");
+	REQUIRE(file1.getLine(2) == "<h2> Overview</h2>");
+	REQUIRE(file1.getLine(7) == "<h3> Lorem Ipsum Section</h3>");
 }
