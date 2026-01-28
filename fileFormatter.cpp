@@ -7,7 +7,7 @@ fileFormatter::fileFormatter(string filePath)
     {
         convertMDtoHTML(i);
     }
-    printToConsole();
+    //printToConsole();
     newHTML();
 }
 

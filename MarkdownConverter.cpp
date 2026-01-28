@@ -247,9 +247,8 @@ string MarkdownConverter::toParagraph()
 string MarkdownConverter::toHorsLine(){
 
 	string retVal = inputLine;
-		if(retVal == "---"){
+		if(retVal == "---" || retVal == "--- "){
 			retVal = "<hr>";
-
 	}
 	return retVal;
 }

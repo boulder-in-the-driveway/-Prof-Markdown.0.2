@@ -218,8 +218,9 @@ TEST_CASE("toHors Test")
 TEST_CASE ("fileFormatter Test")
 {
 	fileFormatter file1 = fileFormatter("/workspaces/-Prof-Markdown.0.2/-Prof-Markdown.txt");
-	REQUIRE(file1.getLine(0) == "<h1> Sample Markdown</h1>");
+	REQUIRE(file1.getLine(0) == "<h1> Assignment 1: Acceptance Test</h1>");
 	//REQUIRE(file1.getLine(2) == "<p>This is some basic, sample markdown.</p>");
-	REQUIRE(file1.getLine(4) == "<hr>");
-	REQUIRE(file1.getLine(6) == "<h2> Second Heading</h2>");
+	REQUIRE(file1.getLine(5) == "<hr>");
+	REQUIRE(file1.getLine(2) == "<h2> Overview</h2>");
+	REQUIRE(file1.getLine(7) == "<h3> Lorem Ipsum Section</h3>");
 }
