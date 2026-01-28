@@ -19,5 +19,5 @@ vector<string> eachLine;
 void readFileLines(const string& filePath);
 void convertMDtoHTML(int pos);
 void printToConsole();
-
+void newHTML();
 };

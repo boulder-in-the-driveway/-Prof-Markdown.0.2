@@ -8,7 +8,7 @@ fileFormatter::fileFormatter(string filePath)
         convertMDtoHTML(i);
     }
     printToConsole();
-    //create new HTML doc
+    newHTML();
 }
 
 string fileFormatter::getLine(int pos)
@@ -64,4 +64,25 @@ void fileFormatter::printToConsole()
     {
         cout << eachLine[i] << endl;
     }
+}
+
+void fileFormatter::newHTML()
+{
+    ofstream MyFile("Converted.html");
+    if (!MyFile.is_open()) {
+        cerr << "Error opening file!" << endl;
+    }
+
+    MyFile << "<!DOCTYPE html>" << endl;
+    MyFile << "<html lang=\"en\">" << endl;
+    MyFile << "<head>" << endl;
+    MyFile << "<meta charset=\"UTF-8\">" << endl;
+    MyFile << "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">" << endl;
+    MyFile << "<title>Document</title>" << endl;
+    MyFile << "</head>" << endl;
+    MyFile << "<body>" << endl;
+
+
+    MyFile << "</body>" << endl;
+    MyFile << "</html>";
 }
