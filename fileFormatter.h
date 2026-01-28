@@ -21,3 +21,4 @@ void convertMDtoHTML(int pos);
 void printToConsole();
 void newHTML();
 };
+
