@@ -16,8 +16,10 @@ string getLine(int pos);
 
 private:
 vector<string> eachLine;
+bool inCodeBlock = false;
 void readFileLines(const string& filePath);
 void convertMDtoHTML(int pos);
+void convertCodeHTML(int pos);
 void printToConsole();
 void newHTML();
 };

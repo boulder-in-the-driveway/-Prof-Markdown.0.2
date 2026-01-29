@@ -3,9 +3,26 @@
 fileFormatter::fileFormatter(string filePath)
 {
     readFileLines(filePath);
+    makeReadableCode();
+    int count = 0;
     for (int i = 0; i < eachLine.size(); i++)
     {
-        convertMDtoHTML(i);
+        if (inCodeBlock)
+        {
+            convertCodeHTML(i);
+        } else 
+        {
+            convertMDtoHTML(i);
+        }
+        
+        if (eachLine[i] == "<code>")
+        {
+            inCodeBlock = true;
+        } 
+        if (eachLine[i] == "</code>")
+        {
+            inCodeBlock = false;
+        }
     }
     //printToConsole();
     newHTML();
@@ -58,6 +75,11 @@ void fileFormatter::convertMDtoHTML(int pos)
     }
 }
 
+void fileFormatter::convertCodeHTML(int pos)
+{
+
+}
+
 void fileFormatter::printToConsole()
 {
     for (int i = 0; i < eachLine.size(); i++)
@@ -89,4 +111,26 @@ void fileFormatter::newHTML()
 
     MyFile << "</body>" << endl;
     MyFile << "</html>";
+}
+
+void fileFormatter::makeReadableCode()
+{
+    for (int i = 0; i < eachLine.size(); i++)
+    {
+        if (eachLine[i].substr(0,8) == "``` file")
+        {
+            string name;
+            for (int j = 0; j < eachLine[i].length(); j++)
+            {
+                if (eachLine[i][j] == '"')
+                {
+                    name = eachLine[i].substr(j+1, eachLine[i].find('"', j)-1);
+                    break;
+                }
+            }
+            string markName = "# " + name;
+            eachLine.insert(eachLine.begin() + i-1, markName);
+            eachLine[i+1] = "```";
+        }
+    }
 }

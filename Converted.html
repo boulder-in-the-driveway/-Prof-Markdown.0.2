@@ -21,7 +21,7 @@ Integer at ex at erat aliquam rutrum. Sed facilisis lorem sed pulvinar dapibus. 
 Aliquam sed nisi ultrices, faucibus tortor vel, blandit purus. Integer dignissim velit sit amet purus convallis, fringilla facilisis augue tristique. Nulla facilisi. Nulla at consequat odio. Donec odio mi, consectetur mattis condimentum ac, suscipit nec purus. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Praesent tempor fermentum accumsan. In tristique tincidunt est, a tincidunt sapien sollicitudin sit amet. Nam hendrerit commodo diam eget gravida. Donec vestibulum sodales purus scelerisque malesuada. Praesent ornare enim eu euismod tincidunt. Aliquam viverra nibh pulvinar mauris vulputate, quis commodo felis efficitur.
 
 <h2> Some Emphasized Text</h2>
-Here is some text with <strong>bold</strong> and <em>italic</em> formatting to demonstrate emphasis in the document. Here is a simple code snippet <code>int x;</code> to illustrate inline code formatting. You can find my GitHub account here: <a href="https://github.com/markm208">markm208</a> and a picture of me here: <img src="https://avatars.githubusercontent.com/u/934916?v=4" alt="Me">
+Here is some text with <strong>bold</strong> and <em>italic</em> formatting to demonstrate emphasis in the document. Here is a simple code snippet `int x;` to illustrate inline code formatting. You can find my GitHub account here: <a href="https://github.com/markm208">markm208</a> and a picture of me here: <img src="https://avatars.githubusercontent.com/u/934916?v=4" alt="Me">
 
 <h2> Code Block Example</h2>
 Below is an example of a code block demonstrating a simple function in C/C++. I'll discuss:
@@ -30,8 +30,9 @@ Below is an example of a code block demonstrating a simple function in C/C++. I'
 <li> flow of control</li>
 <li> the main function</li>
 </ol>
+<h1> main.cpp</h1>
 
-<code></code><code> file="main.cpp" 
+```
 <h1>include <iostream></h1>
 using namespace std;
 
@@ -41,11 +42,12 @@ int main()
 
     return 0;
 }
-<code></code><code>
+```
 
 In order to print to the console window one needs to include the iostream library and use the standard namespace. 
+<h1> main.cpp</h1>
 
-<code></code><code> file="main.cpp" highlight="1,2"
+```
 <h1>include <iostream></h1>
 using namespace std;
 
@@ -55,11 +57,12 @@ int main()
 
     return 0;
 }
-<code></code><code>
+```
 
 The main function is the entry point of the program, and it returns an integer value upon completion.
+<h1> main.cpp</h1>
 
-<code></code><code> file="main.cpp" highlight="4-9"
+```
 <h1>include <iostream></h1>
 using namespace std;
 
@@ -69,11 +72,12 @@ int [<main()>]
 
     return 0;
 }
-<code></code><code>
+```
 
-<code>cout</code> is used to print text to the console. The <code><<</code> operator is used to send the string "Hello World!!!!" followed by an newline to the output stream.
+`cout` is used to print text to the console. The `<<` operator is used to send the string "Hello World!!!!" followed by an newline to the output stream.
+<h1> main.cpp</h1>
 
-<code></code><code> file="main.cpp" highlight="6"
+```
 <h1>include <iostream></h1>
 using namespace std;
 
@@ -83,11 +87,12 @@ int main()
 
     return 0;
 }
-<code></code><code> 
+``` 
 
-<code>main</code> returns 0 to indicate that the program has completed successfully.
+`main` returns 0 to indicate that the program has completed successfully.
+<h1> main.cpp</h1>
 
-<code></code><code> file="main.cpp" highlight="8"
+```
 <h1>include <iostream></h1>
 using namespace std;
 
@@ -97,16 +102,17 @@ int main()
 
     [<return 0;>]
 }
-<code></code><code>
+```
 
 The output of the following program will be:
-<code></code><code>program-output
+```program-output
 Hello World!!!!
-<code></code><code>
+```
 
-If I repeated the <code>cout</code> a few times like this:
+If I repeated the `cout` a few times like this:
+<h1> main.cpp</h1>
 
-<code></code><code> file="main.cpp" highlight="6-8"
+```
 <h1>include <iostream></h1>
 using namespace std;
 
@@ -118,15 +124,15 @@ int main()
 
     return 0;
 }
-<code></code><code> 
+``` 
 
 Then the output would be:
 
-<code></code><code>program-output
+```program-output
 Hello World!!!!
 Hello World!!!!
 Hello World!!!!
-<code></code><code>
+```
 
 <h3> Status Table</h3>
 :::table cols="[<em>Feature</em>][Not Started][Doing][Done]"
