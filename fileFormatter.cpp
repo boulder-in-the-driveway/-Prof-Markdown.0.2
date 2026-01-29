@@ -142,6 +142,7 @@ void fileFormatter::newHTML()
 
 void fileFormatter::makeReadableCode()
 {
+    vector <int> linesToHighlight;
     for (int i = 0; i < eachLine.size(); i++)
     {
         if (eachLine[i].substr(0,8) == "``` file")
@@ -157,6 +158,57 @@ void fileFormatter::makeReadableCode()
             }
             string markName = "# " + name;
             eachLine.insert(eachLine.begin() + i-1, markName);
+
+            if (eachLine[i+1].find("high", 0) < eachLine[i].length())
+            {
+                int highlightPos = eachLine[i+1].find("high", 10);
+                string ranges;
+                for (int j = highlightPos; j < eachLine[i].length(); j++)
+                {
+                    if (eachLine[i][j] == '"')
+                    {
+                        ranges = eachLine[i].substr(j+1, eachLine[i].find('"', j)-1);
+                        break;
+                    }
+                }          
+
+                vector <string> sepRanges;
+                stringstream stream(ranges);
+
+                while (stream.good()) 
+                {
+                    string substr;
+                    getline(stream, substr, ',');
+                    sepRanges.push_back(substr);
+                }
+
+                for (int k = 0; k < sepRanges.size(); k++)
+                {
+                    if (sepRanges[k].find('-', 0))
+                    {
+                        int temp = sepRanges[k].find('-', 0);
+                        int startNum = stoi(sepRanges[k].substr(0, temp));
+                        int endNum = stoi(sepRanges[k].substr(temp, sepRanges[k].length()));
+
+                        while (startNum <= endNum)
+                        {
+                            linesToHighlight.push_back(startNum);
+                            startNum++;
+                        }
+                    }
+                    else
+                    {
+                        linesToHighlight.push_back(stoi(sepRanges[k]));
+                    }
+                }
+
+                for (int l = 0; l < linesToHighlight.size(); l++)
+                {
+                    eachLine[i+linesToHighlight[l]].insert(0, "==");
+                    eachLine[i+linesToHighlight[l]].append("==");
+                }
+
+            }
             eachLine[i+1] = "```";
         }
     }
