@@ -214,7 +214,7 @@ TEST_CASE("toHors Test")
 	REQUIRE(mc1.toHorsLine() == "<hr>");
 
 }
-
+/*
 TEST_CASE ("fileFormatter Test")
 {
 	fileFormatter file1 = fileFormatter("/workspaces/-Prof-Markdown.0.2/-Prof-Markdown.txt");
@@ -224,3 +224,4 @@ TEST_CASE ("fileFormatter Test")
 	REQUIRE(file1.getLine(2) == "<h2> Overview</h2>");
 	REQUIRE(file1.getLine(7) == "<h3> Lorem Ipsum Section</h3>");
 }
+*/

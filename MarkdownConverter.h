@@ -11,7 +11,7 @@ public:
     MarkdownConverter(string toInput);
     MarkdownConverter(string toInput, string toPreviousLine, string toNextLine);
 
-    string runConverter();
+    string runConverter(bool isCode);
     //toBold must ALWAYS be called before toItalic
     string toBold();
     string toItalic();
@@ -22,6 +22,8 @@ public:
     string toParagraph();
     string toImage();
     string toHorsLine();
+    string toHighlight();
+    string toCodeBlock(bool isCode);
 
 
 private:

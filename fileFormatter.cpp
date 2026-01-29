@@ -2,26 +2,22 @@
 
 fileFormatter::fileFormatter(string filePath)
 {
+    inCodeBlock = false;
     readFileLines(filePath);
     makeReadableCode();
-    int count = 0;
     for (int i = 0; i < eachLine.size(); i++)
     {
+        if (eachLine[i] == "```")
+        {
+            
+        } 
+
         if (inCodeBlock)
         {
             convertCodeHTML(i);
         } else 
         {
             convertMDtoHTML(i);
-        }
-        
-        if (eachLine[i] == "<code>")
-        {
-            inCodeBlock = true;
-        } 
-        if (eachLine[i] == "</code>")
-        {
-            inCodeBlock = false;
         }
     }
     //printToConsole();
@@ -58,26 +54,49 @@ void fileFormatter::convertMDtoHTML(int pos)
     int last = eachLine.size() -1;
     if(pos > 0 && pos < last){
         MarkdownConverter line = MarkdownConverter(eachLine[pos], eachLine[pos-1], eachLine[pos+1]);
-        string temp = line.runConverter();
+        string temp = line.runConverter(inCodeBlock);
         eachLine[pos] = temp;
     }
     else if (pos == 0)
     {
         MarkdownConverter line = MarkdownConverter(eachLine[pos], "", eachLine[pos+1]);
-        string temp = line.runConverter();
+        string temp = line.runConverter(inCodeBlock);
         eachLine[pos] = temp;
     }
     else
     {
         MarkdownConverter line = MarkdownConverter(eachLine[pos], eachLine[pos-1], "");
-        string temp = line.runConverter();
+        string temp = line.runConverter(inCodeBlock);
         eachLine[pos] = temp;
     }
 }
 
 void fileFormatter::convertCodeHTML(int pos)
 {
-
+    int last = eachLine.size() -1;
+    if(pos > 0 && pos < last){
+        MarkdownConverter line = MarkdownConverter(eachLine[pos], eachLine[pos-1], eachLine[pos+1]);
+        string temp;
+        temp = line.toCodeBlock(inCodeBlock);
+        temp = line.toHighlight();
+        eachLine[pos] = temp;
+    }
+    else if (pos == 0)
+    {
+        MarkdownConverter line = MarkdownConverter(eachLine[pos], "", eachLine[pos+1]);
+        string temp;
+        temp = line.toCodeBlock(inCodeBlock);
+        temp = line.toHighlight();
+        eachLine[pos] = temp;
+    }
+    else
+    {
+        MarkdownConverter line = MarkdownConverter(eachLine[pos], eachLine[pos-1], "");
+        string temp;
+        temp = line.toCodeBlock(inCodeBlock);
+        temp = line.toHighlight();
+        eachLine[pos] = temp;
+    }
 }
 
 void fileFormatter::printToConsole()

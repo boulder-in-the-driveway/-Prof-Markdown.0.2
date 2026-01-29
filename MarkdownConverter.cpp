@@ -15,13 +15,14 @@ MarkdownConverter::MarkdownConverter(string toInput, string toPreviousLine, stri
     nextLine = toNextLine;
 }
 
-string MarkdownConverter::runConverter()
+string MarkdownConverter::runConverter(bool isCode)
 {
     if (inputLine != "")
     {
         inputLine = toBold();
         inputLine = toItalic();
         inputLine = toHeader();
+        inputLine = toCodeBlock(isCode);
         //inputLine = toOneLineCode();
         inputLine = toLink();
         inputLine = toHorsLine();
@@ -251,4 +252,26 @@ string MarkdownConverter::toHorsLine(){
 			retVal = "<hr>";
 	}
 	return retVal;
+}
+
+string MarkdownConverter::toHighlight()
+{
+    return replaceNotation("==", "<mark>", "</mark>");
+}
+
+string MarkdownConverter::toCodeBlock(bool isCode)
+{
+    string retVal = inputLine;
+    if (retVal == "```")
+    {
+        if (!isCode)
+        {
+            retVal = "<code>";
+        }
+        else
+        {
+            retVal = "</code>";
+        }
+    }
+    return retVal;
 }
