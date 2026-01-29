@@ -22,8 +22,7 @@ string MarkdownConverter::runConverter(bool isCode)
         inputLine = toBold();
         inputLine = toItalic();
         inputLine = toHeader();
-        inputLine = toCodeBlock(isCode);
-        //inputLine = toOneLineCode();
+        inputLine = toOneLineCode();
         inputLine = toLink();
         inputLine = toHorsLine();
         inputLine = toList();
@@ -257,21 +256,4 @@ string MarkdownConverter::toHorsLine(){
 string MarkdownConverter::toHighlight()
 {
     return replaceNotation("==", "<mark>", "</mark>");
-}
-
-string MarkdownConverter::toCodeBlock(bool isCode)
-{
-    string retVal = inputLine;
-    if (retVal == "```")
-    {
-        if (!isCode)
-        {
-            retVal = "<code>";
-        }
-        else
-        {
-            retVal = "</code>";
-        }
-    }
-    return retVal;
 }

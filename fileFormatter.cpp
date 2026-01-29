@@ -7,15 +7,23 @@ fileFormatter::fileFormatter(string filePath)
     makeReadableCode();
     for (int i = 0; i < eachLine.size(); i++)
     {
-        if (eachLine[i] == "```")
+        if (eachLine[i] == "```" || eachLine[i] == "``` ")
         {
-            
+            if (inCodeBlock)
+            {
+                eachLine[i] = "</code>";
+            }
+            else
+            {
+                eachLine[i] = "<code>";
+            }
+            inCodeBlock = !inCodeBlock;
         } 
-
-        if (inCodeBlock)
+        else if (inCodeBlock)
         {
             convertCodeHTML(i);
-        } else 
+        } 
+        else 
         {
             convertMDtoHTML(i);
         }
@@ -73,29 +81,29 @@ void fileFormatter::convertMDtoHTML(int pos)
 
 void fileFormatter::convertCodeHTML(int pos)
 {
-    int last = eachLine.size() -1;
-    if(pos > 0 && pos < last){
-        MarkdownConverter line = MarkdownConverter(eachLine[pos], eachLine[pos-1], eachLine[pos+1]);
-        string temp;
-        temp = line.toCodeBlock(inCodeBlock);
-        temp = line.toHighlight();
-        eachLine[pos] = temp;
-    }
-    else if (pos == 0)
+    if (eachLine[pos] != "")
     {
-        MarkdownConverter line = MarkdownConverter(eachLine[pos], "", eachLine[pos+1]);
-        string temp;
-        temp = line.toCodeBlock(inCodeBlock);
-        temp = line.toHighlight();
-        eachLine[pos] = temp;
-    }
-    else
-    {
-        MarkdownConverter line = MarkdownConverter(eachLine[pos], eachLine[pos-1], "");
-        string temp;
-        temp = line.toCodeBlock(inCodeBlock);
-        temp = line.toHighlight();
-        eachLine[pos] = temp;
+        int last = eachLine.size() -1;
+        if(pos > 0 && pos < last){
+            MarkdownConverter line = MarkdownConverter(eachLine[pos], eachLine[pos-1], eachLine[pos+1]);
+            string temp;
+            temp = line.toHighlight();
+            eachLine[pos] = temp;
+        }
+        else if (pos == 0)
+        {
+            MarkdownConverter line = MarkdownConverter(eachLine[pos], "", eachLine[pos+1]);
+            string temp;
+            temp = line.toHighlight();
+            eachLine[pos] = temp;
+        }
+        else
+        {
+            MarkdownConverter line = MarkdownConverter(eachLine[pos], eachLine[pos-1], "");
+            string temp;
+            temp = line.toHighlight();
+            eachLine[pos] = temp;
+        }
     }
 }
 

@@ -23,7 +23,6 @@ public:
     string toImage();
     string toHorsLine();
     string toHighlight();
-    string toCodeBlock(bool isCode);
 
 
 private:

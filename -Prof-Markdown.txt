@@ -88,39 +88,3 @@ int main()
     [<return 0;>]
 }
 ```
-
-The output of the following program will be:
-```program-output
-Hello World!!!!
-```
-
-If I repeated the `cout` a few times like this:
-
-``` file="main.cpp" highlight="6-8"
-#include <iostream>
-using namespace std;
-
-int main()
-{
-    [<cout>] << "Hello World!!!!" << [<endl;>]
-    [<cout>] << "Hello World!!!!" << [<endl;>]
-    [<cout>] << "Hello World!!!!" << [<endl;>]
-
-    return 0;
-}
-``` 
-
-Then the output would be:
-
-```program-output
-Hello World!!!!
-Hello World!!!!
-Hello World!!!!
-```
-
-### Status Table
-:::table cols="[*Feature*][Not Started][Doing][Done]"
-[Basic Markdown][✓][][]
-[Extended Code Markdown][✗][✓][]
-[Table Markdown][✗][✗][✓]
-:::
