@@ -165,9 +165,9 @@ void fileFormatter::makeReadableCode()
                 string ranges;
                 for (int j = highlightPos; j < eachLine[i].length(); j++)
                 {
-                    if (eachLine[i][j] == '"')
+                    if (eachLine[i+i][j] == '"')
                     {
-                        ranges = eachLine[i].substr(j+1, eachLine[i].find('"', j)-1);
+                        ranges = eachLine[i+1].substr(j+1, eachLine[i+1].find('"', j)-1);
                         break;
                     }
                 }          
@@ -204,8 +204,8 @@ void fileFormatter::makeReadableCode()
 
                 for (int l = 0; l < linesToHighlight.size(); l++)
                 {
-                    eachLine[i+linesToHighlight[l]].insert(0, "==");
-                    eachLine[i+linesToHighlight[l]].append("==");
+                    eachLine[i+1+linesToHighlight[l]].insert(0, "==");
+                    eachLine[i+1+linesToHighlight[l]].append("==");
                 }
 
             }
