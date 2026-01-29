@@ -22,5 +22,5 @@ void convertMDtoHTML(int pos);
 void convertCodeHTML(int pos);
 void printToConsole();
 void newHTML();
-void makeReadableCode();
 };
+

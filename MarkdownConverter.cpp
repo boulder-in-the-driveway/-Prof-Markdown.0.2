@@ -225,25 +225,28 @@ string MarkdownConverter::swapNotation(string firstPart, string secondPart, char
 
 string MarkdownConverter::toParagraph()
 {
-    string retVal = inputLine;
-    size_t pos = retVal.find("\n\n"); //look for the characters for the paragraph
+     // look for paragraph break
+    size_t pos = inputLine.find("\n\n"); //still looking for this  from markdown
 
-    if (pos != string::npos){
-
-        string before = retVal.substr(0, pos); //breaks up the continued string
-        string after = retVal.substr(pos + 2); //so we don't put tags on all of it
-
-        // trim trailing space from paragraph
-        while (!before.empty() && before.back() == ' ')
-        { //we don't want a space
-            before.pop_back();
-        }
-
-        retVal = "<p>" + before + "</p>" + after; //puts in the tags, 
-        //and includes the remaining string 
+    // no \n\n → not a paragraph
+    if (pos == string::npos) //DD NOTHING
+    {
+        return inputLine;
     }
 
-    return retVal;
+    //ELSE CONTINUE
+    // split paragraph and remainder
+    string before = inputLine.substr(0, pos); //Same as before, we will split
+    string after  = inputLine.substr(pos + 2);
+
+    // trim trailing spaces/newlines from paragraph text
+    while (!before.empty() &&
+          (before.back() == ' ' || before.back() == '\n')) 
+    {
+        before.pop_back(); //send back
+    }
+
+    return "<p>" + before + "</p>" + after; //print
 }
 
 string MarkdownConverter::toHorsLine(){
