@@ -1,5 +1,6 @@
 #pragma once
 #include <iostream>
+#include <sstream>
 #include <vector>
 #include <string>
 #include <fstream>
@@ -17,6 +18,7 @@ string getLine(int pos);
 private:
 vector<string> eachLine;
 bool inCodeBlock = false;
+int cBCounter;
 void readFileLines(const string& filePath);
 void convertMDtoHTML(int pos);
 void convertCodeHTML(int pos);
