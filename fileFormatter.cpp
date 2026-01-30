@@ -159,13 +159,13 @@ void fileFormatter::makeReadableCode()
             string markName = "# " + name;
             eachLine.insert(eachLine.begin() + i-1, markName);
 
-            if (eachLine[i+1].find("high", 0) < eachLine[i].length())
+            if (eachLine[i+1].find("highlight", 0) < eachLine[i+1].length())
             {
-                int highlightPos = eachLine[i+1].find("high", 10);
+                int highlightPos = eachLine[i+1].find("highlight", 10);
                 string ranges;
-                for (int j = highlightPos; j < eachLine[i].length(); j++)
+                for (int j = highlightPos; j < eachLine[i+1].length(); j++)
                 {
-                    if (eachLine[i+i][j] == '"')
+                    if (eachLine[i+1][j] == '"')
                     {
                         ranges = eachLine[i+1].substr(j+1, eachLine[i+1].find('"', j)-1);
                         break;
@@ -184,7 +184,7 @@ void fileFormatter::makeReadableCode()
 
                 for (int k = 0; k < sepRanges.size(); k++)
                 {
-                    if (sepRanges[k].find('-', 0))
+                    if (sepRanges[k].find('-', 0) < sepRanges[k].size())
                     {
                         int temp = sepRanges[k].find('-', 0);
                         int startNum = stoi(sepRanges[k].substr(0, temp));
